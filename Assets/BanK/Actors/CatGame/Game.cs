@@ -29,18 +29,14 @@ public class Game : MonoBehaviour
 
 
                     void Spawners_Init() {
-                        Spawners = FindObjectsOfType<Spawner>();
-                    }
-                    float SpawnTime = 0;   
-                    void Spawners_Update() {
-                        SpawnTime+= Time.deltaTime;
-                        if(SpawnTime>2){ SpawnTime=0;
+                        Spawners = FindObjectsOfType<Spawner>();                            
                             foreach (Spawner EACH in Spawners)
                             {
                                 EACH.Spawn(SpawnOBJ[0]);
                             }
-                        }
-
+                    }
+                    float SpawnTime = 0;   
+                    void Spawners_Update() {
                         CatRows = CatRows.OrderBy(row => row.Cat.CurrentScore).ToArray();
                         for (int i = 0; i < CatRows.Length; i++)
                         {

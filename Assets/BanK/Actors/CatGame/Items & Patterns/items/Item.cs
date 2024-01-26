@@ -9,7 +9,6 @@ public class Item : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(-0.1f, 0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

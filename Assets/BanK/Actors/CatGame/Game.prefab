@@ -46,5 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CatRows: []
   Spawners: []
+  RowOffset: 0.4
+  RowScale: 2.25
   SpawnOBJ:
-  - {fileID: 1315426926643841717, guid: d21b916a292e4194b892340641c93b7f, type: 3}
+  - {fileID: 4260157546202093726, guid: e055039c8d791404ba765e8534967815, type: 3}
