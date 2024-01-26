@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cat : MonoBehaviour
 {
+    public int CurrentScore = 0;
     private int currentPoints = 0; 
     public int maxPoints = 100; 
 
