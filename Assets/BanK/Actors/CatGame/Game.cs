@@ -35,7 +35,7 @@ public class Game : MonoBehaviour
                                 EACH.Spawn(SpawnOBJ[0]);
                             }
                     }
-                    float SpawnTime = 0;   
+                    //float SpawnTime = 0;   
                     void Spawners_Update() {
                         CatRows = CatRows.OrderBy(row => row.Cat.CurrentScore).ToArray();
                         for (int i = 0; i < CatRows.Length; i++)

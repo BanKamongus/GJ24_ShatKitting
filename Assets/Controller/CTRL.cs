@@ -32,8 +32,9 @@ public class CTRL : MonoBehaviour
 
     public void OnAct1(InputAction.CallbackContext context)
     {
-        //actAttack = context.ReadValue<bool>();
+       //actAttack = context.ReadValue<bool>();
         act01 = context.action.triggered;
+        Debug.Log(act01);
     }
 
     public void OnAct2(InputAction.CallbackContext context)
@@ -86,7 +87,7 @@ public class CTRL : MonoBehaviour
 
     }
 
-    float Value = 0;
+    //float Value = 0;
 
     private void Action01()
     {
