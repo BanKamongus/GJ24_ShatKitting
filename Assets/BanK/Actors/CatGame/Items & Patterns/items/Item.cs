@@ -9,16 +9,12 @@ public class Item : MonoBehaviour
 
     void Update()
     {
+        transform.position += new Vector3(-0.1f, 0, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void DestroyItem()
     {
-        Cat GetCat = collision.gameObject.GetComponent<Cat>();
-        if (GetCat != null)
-        {
-            GetCat.Feed(foodPoints);
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
 }

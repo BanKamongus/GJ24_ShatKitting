@@ -14,10 +14,10 @@ public class CTRL : MonoBehaviour
     public GameObject walkVFX;
 
 
-    private Vector3 currentVelocity; 
+    private Vector3 currentVelocity;
 
     private Vector2 movementInput = Vector2.zero;
-    private bool act01,act02,act03,act04 = false;
+    private bool act01, act02, act03, act04 = false;
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class CTRL : MonoBehaviour
         movementInput = context.ReadValue<Vector2>();
     }
 
-    public void OnAct1(InputAction.CallbackContext context) 
+    public void OnAct1(InputAction.CallbackContext context)
     {
         //actAttack = context.ReadValue<bool>();
         act01 = context.action.triggered;
@@ -58,29 +58,30 @@ public class CTRL : MonoBehaviour
     private void Update()
     {
 
-            Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y).normalized * moveSpeed;
-            currentVelocity = movement;
+        Vector3 movement = new Vector3(movementInput.x, 0, movementInput.y).normalized * moveSpeed;
+        currentVelocity = movement;
 
-            transform.Translate(currentVelocity * Time.deltaTime, Space.World);
+        transform.Translate(currentVelocity * Time.deltaTime, Space.World);
 
-            Vector3 targetDirection = new Vector3(movementInput.x, 0, movementInput.y);
-            if (targetDirection != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-            }
+        Vector3 targetDirection = new Vector3(movementInput.x, 0, movementInput.y);
+        if (targetDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        }
 
 
-            //animator.SetFloat("Speed", currentVelocity.magnitude);
+        //animator.SetFloat("Speed", currentVelocity.magnitude);
 
-            //if(currentVelocity.magnitude >= 0.01)
-            //{
-            //    walkVFX.SetActive(true);
-            //}
-            //else if (currentVelocity.magnitude < 0.01)
-            //{
-            //    walkVFX.SetActive(false);
-            //}
+        //if(currentVelocity.magnitude >= 0.01)
+        //{
+        //    walkVFX.SetActive(true);
+        //}
+        //else if (currentVelocity.magnitude < 0.01)
+        //{
+        //    walkVFX.SetActive(false);
+        //}
+
 
 
     }
@@ -89,18 +90,28 @@ public class CTRL : MonoBehaviour
 
     private void Action01()
     {
-
+        Debug.Log("Action 01");
     }
 
     private void Action02()
     {
-
+        Debug.Log("Action 02");
     }
 
     private void Action03()
     {
-
+        Debug.Log("Action 03");
     }
+
+    public bool IsAnyActionKeyPressed()
+    {
+        return act01 || act02 || act03 || act04;
+    }
+
+    public bool IsAct01Triggered() { Debug.Log("Action 01"); return act01; }
+    public bool IsAct02Triggered() { Debug.Log("Action 02"); return act02; }
+    public bool IsAct03Triggered() { Debug.Log("Action 03"); return act03; }
+    public bool IsAct04Triggered() { Debug.Log("Action 04"); return act04; }
 
     private IEnumerator MoveForward(Vector3 endPos)
     {
