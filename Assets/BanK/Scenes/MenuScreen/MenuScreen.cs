@@ -5,6 +5,7 @@ using System.Collections;
 
 public class MenuScreen : MonoBehaviour
 {
+    public RectTransform MyRect;
     public Animator fadeblack;
     public float TransitionTime = 0.1f;
     public float SwipeSpeed = 10.0f;
@@ -97,20 +98,20 @@ public class MenuScreen : MonoBehaviour
     IEnumerator SwipeText()
     {
         Vector3 startPosition = Text.transform.position;
-        Vector3 targetPosition = new Vector3(550, Text.transform.position.y, Text.transform.position.z);
+        Vector3 targetPosition = new Vector3(830, Text.transform.position.y, Text.transform.position.z);
 
         float elapsedTime = 0f;
 
         while (elapsedTime < .5f)
         {
-            float t = Mathf.Clamp01(elapsedTime / .5f);
-            Text.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-
-            elapsedTime += Time.deltaTime;
+            //float t = Mathf.Clamp01(elapsedTime / .5f);
+            //Text.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            MyRect.position = targetPosition;
+            //elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        Text.transform.position = targetPosition;
+        MyRect.position = targetPosition;
     }
 
     public void LoadNextScene()

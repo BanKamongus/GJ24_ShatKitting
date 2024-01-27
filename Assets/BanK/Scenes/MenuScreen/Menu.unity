@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 19a3682cb6990604a8edefa1ee65a168, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2b026d9c864a2384e901365ad852ebe7, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1597,10 +1597,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27eb4e8574290a4eb8f839f018ca091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyRect: {fileID: 890678130}
   fadeblack: {fileID: 1401551168}
   TransitionTime: 2
-  SwipeSpeed: 750
-  SwipeDistance: 7500
+  SwipeSpeed: 800
+  SwipeDistance: 9999
   holdDuration: 1.75
   Bar: {fileID: 1543553347}
   Text: {fileID: 890678129}

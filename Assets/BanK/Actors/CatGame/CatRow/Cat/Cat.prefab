@@ -138,11 +138,12 @@ MonoBehaviour:
   maxPoints: 100
   actionKey: 97
   CurrentScore: 0
+  TeamID: 1
   TXT_Score: {fileID: 674717898559996077}
   moveKey: 113
   moveSpeed: 5
   SpeedMultiplier: 1
-  moveDistance: 2
+  moveDistance: 13
   poopPrefab: {fileID: 8957473494243288996, guid: 846a62210c65ae648ac3dd4a9c283367,
     type: 3}
   poopSpawnPoint: {fileID: 582083215177240572}

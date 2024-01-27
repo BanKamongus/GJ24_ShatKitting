@@ -44,15 +44,15 @@ public class Item : MonoBehaviour
                 {
                     case FoodType.Meat:
                         // Apply effect for Food Type 1
-                        cat.Feed(foodPoints);
+                        cat.Feed(foodPoints, foodType);
                         break;
                     case FoodType.Veggie:
                         // Apply effect for Food Type 2
-                        cat.Feed(foodPoints);
+                        cat.Feed(foodPoints, foodType);
                         break;
                     case FoodType.Royal:
                         // Apply effect for Food Type 3
-                        cat.Feed(foodPoints);
+                        cat.Feed(foodPoints, foodType);
                         break;
                 }
                 break;

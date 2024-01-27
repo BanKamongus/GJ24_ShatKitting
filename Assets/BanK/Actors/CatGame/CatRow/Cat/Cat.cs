@@ -27,8 +27,14 @@ public class Cat : MonoBehaviour
     public float moveDistance = 3.0f; // Distance to move
 
     [Header("Poop Settings")]
-    public GameObject poopPrefab; // Assign this in the Inspector
-    public Transform poopSpawnPoint; // Assign this in the Inspector
+    public Transform poopSpawnPoint; // Make sure this is assigned in the Inspector
+
+    [Header("Poop Prefabs")]
+    public GameObject meatPoopPrefab;
+    public GameObject veggiePoopPrefab;
+    public GameObject royalPoopPrefab;
+
+    private Item.FoodType lastFoodType;
 
     private Vector3 originalPosition; // Original position of the cat
     private Vector3 targetPosition; // Target position when moving
@@ -65,7 +71,7 @@ public class Cat : MonoBehaviour
     {
         if (Input.GetKey(moveKey))
         {
-            // Move to the right, but not beyond x = 10
+            // Move to the right, but not beyond x = 10s
             if (transform.position.x < originalPosition.x + 10)
             {
                 MoveCat(new Vector3(moveSpeed * SpeedMultiplier * Time.deltaTime, 0, 0));
@@ -117,22 +123,23 @@ public class Cat : MonoBehaviour
             case Item.ItemType.Food:
                 if (!isShatting)
                 {
-                    Feed(item.foodPoints); // Feed food points
+                    Feed(item.foodPoints, item.foodType); // Include foodType here
                 }
                 break;
             case Item.ItemType.ScoreObject:
-                IncreaseScore(item.scoreValue); // Increase score
+                IncreaseScore(item.scoreValue);
                 break;
         }
         item.DestroyItem();
     }
+
 
     private bool IsActionKeyPressed()
     {
         return Input.GetKeyDown(actionKey);
     }
 
-    public void Feed(int points)
+    public void Feed(int points, Item.FoodType foodType)
     {
         if (!isShatting) // Check if the cat is not in the shat process
         {
@@ -152,6 +159,9 @@ public class Cat : MonoBehaviour
                 Debug.Log("Cat has " + currentPoints + " points");
             }
         }
+
+        lastFoodType = foodType;
+
     }
 
     IEnumerator TimeToShat()
@@ -161,16 +171,30 @@ public class Cat : MonoBehaviour
         // Wait for 3 seconds
         yield return new WaitForSeconds(3);
 
-        // Instantiate the poop object at the cat's current position
-        if (poopPrefab != null)
+        // Choose the correct poop prefab based on the last food type
+        GameObject selectedPoopPrefab = null;
+        switch (lastFoodType)
         {
-            GameObject NewOBJ = Instantiate(poopPrefab, poopSpawnPoint.transform.position, Quaternion.identity);
+            case Item.FoodType.Meat:
+                selectedPoopPrefab = meatPoopPrefab;
+                break;
+            case Item.FoodType.Veggie:
+                selectedPoopPrefab = veggiePoopPrefab;
+                break;
+            case Item.FoodType.Royal:
+                selectedPoopPrefab = royalPoopPrefab;
+                break;
+        }
+
+        if (selectedPoopPrefab != null)
+        {
+            GameObject NewOBJ = Instantiate(selectedPoopPrefab, poopSpawnPoint.transform.position, Quaternion.identity);
             BaseShit NewShit = NewOBJ.GetComponent<BaseShit>();
             NewShit.TeamID = TeamID;
         }
         else
         {
-            Debug.LogError("Poop prefab not assigned!");
+            Debug.LogError("Poop prefab for the food type not assigned!");
         }
 
         // Reset points to 0

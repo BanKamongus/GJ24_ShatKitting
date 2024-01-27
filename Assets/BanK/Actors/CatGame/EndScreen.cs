@@ -10,7 +10,7 @@ public class EndScreen : MonoBehaviour
     }
 
     public void Menu(){
-        SceneManager.LoadScene("GamePlay");
+        SceneManager.LoadScene("Menu");
     }
 
 }
