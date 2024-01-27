@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -29,9 +31,30 @@ public class Item : MonoBehaviour
 
     public bool HasBeenUsed { get; private set; } = false;
 
+    private bool ZLock = true;
+
+
+
+    float G = 0.05f;
+    float V = 0.016f;
+    int Ylvl = 0;
+
+    void Start()
+    {
+        Ylvl = Random.Range(0, -3);
+    }
     void Update()
     {
-        // Item logic (if any) goes here
+        
+        if(!ZLock)
+        {
+            V -= G*Time.deltaTime;
+            transform.position += new Vector3(0, V, 0.005f);
+            transform.rotation *= Quaternion.Euler(0, 0, 4);
+            if (transform.position.y < Ylvl) {
+                Destroy(gameObject);
+            }
+        }
     }
 
     public void UseItem(Cat cat)
@@ -40,30 +63,16 @@ public class Item : MonoBehaviour
         switch (itemType)
         {
             case ItemType.Food:
-                // Different effects based on food type
-                switch (foodType)
-                {
-                    case FoodType.Meat:
-                        // Apply effect for Food Type 1
-                        cat.Feed(foodPoints, foodType);
-                        break;
-                    case FoodType.Veggie:
-                        // Apply effect for Food Type 2
-                        cat.Feed(foodPoints, foodType);
-                        break;
-                    case FoodType.Royal:
-                        // Apply effect for Food Type 3
-                        cat.Feed(foodPoints, foodType);
-                        break;
-                }
+                // Food interaction logic
+                cat.Feed(foodPoints, foodType);
+                DestroyItem(); // Destroy immediately for Food items
                 break;
             case ItemType.ScoreObject:
                 // Increase cat's score
                 cat.IncreaseScore(scoreValue);
+                ZLock = false; // Start moving and then destroy
                 break;
         }
-
-        DestroyItem();
     }
 
     public void DestroyItem()

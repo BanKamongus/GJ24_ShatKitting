@@ -104,7 +104,7 @@ public class Cat : MonoBehaviour
             Debug.Log("Collision with item detected");
             canFeed = true;
             currentItem = item;
-            StartCoroutine(DelayedDestroy(item));
+            //StartCoroutine(DelayedDestroy(item));
         }
     }
 
@@ -130,26 +130,10 @@ public class Cat : MonoBehaviour
 
     private void HandleItemInteraction(Item item)
     {
-        switch (item.itemType)
-        {
-            case Item.ItemType.Food:
-                if (!isShatting)
-                {
-                    Feed(item.foodPoints, item.foodType); // Include foodType here
-                }
-                break;
-            case Item.ItemType.ScoreObject:
-                IncreaseScore(item.scoreValue);
-                break;
-        }
-        item.DestroyItem();
+        item.UseItem(this);
+       
     }
 
-
-    private bool IsActionKeyPressed()
-    {
-        return Input.GetKeyDown(actionKey);
-    }
 
     public void Feed(int points, Item.FoodType foodType)
     {
