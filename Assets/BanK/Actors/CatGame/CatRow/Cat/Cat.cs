@@ -13,6 +13,10 @@ public class Cat : MonoBehaviour
 
     public int CurrentScore = 0;
 
+    [Header("Team")]
+    public int TeamID = 1;
+
+
     [Header("UI")]
     public TextMesh TXT_Score;
 
@@ -32,6 +36,7 @@ public class Cat : MonoBehaviour
 
     private bool canFeed = false; // Flag to track if the cat can feed
     private Item currentItem = null; // Current item the cat can interact 
+    private bool isShatting = false; // Flag to track if the cat is shatting
 
 
     void Start()
@@ -51,10 +56,8 @@ public class Cat : MonoBehaviour
         // Check for action key press and feed if possible
         if (canFeed && Input.GetKeyDown(actionKey) && currentItem != null)
         {
-            Debug.Log("Action key pressed, feeding");
-            Feed(currentItem.foodPoints);
-            currentItem.DestroyItem();
-            canFeed = false; // Reset flag
+            HandleItemInteraction(currentItem);
+            canFeed = false; // Reset flag after interaction
         }
     }
 
@@ -65,7 +68,7 @@ public class Cat : MonoBehaviour
             // Move to the right, but not beyond x = 10
             if (transform.position.x < originalPosition.x + 10)
             {
-                MoveCat(new Vector3(moveSpeed* SpeedMultiplier * Time.deltaTime, 0, 0));
+                MoveCat(new Vector3(moveSpeed * SpeedMultiplier * Time.deltaTime, 0, 0));
             }
         }
         else
@@ -107,6 +110,23 @@ public class Cat : MonoBehaviour
         }
     }
 
+    private void HandleItemInteraction(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.Food:
+                if (!isShatting)
+                {
+                    Feed(item.foodPoints); // Feed food points
+                }
+                break;
+            case Item.ItemType.ScoreObject:
+                IncreaseScore(item.scoreValue); // Increase score
+                break;
+        }
+        item.DestroyItem();
+    }
+
     private bool IsActionKeyPressed()
     {
         return Input.GetKeyDown(actionKey);
@@ -114,30 +134,39 @@ public class Cat : MonoBehaviour
 
     public void Feed(int points)
     {
-        currentPoints += points;
-        if (currentPoints >= maxPoints)
+        if (!isShatting) // Check if the cat is not in the shat process
         {
-            currentPoints = maxPoints;
-            Debug.Log("Cat has reached max points. Time to shat!");
+            currentPoints += points;
+            if (currentPoints >= maxPoints)
+            {
+                currentPoints = maxPoints;
+                Debug.Log("Cat has reached max points. Time to shat!");
 
-            // Start the coroutine
-            StartCoroutine(TimeToShat());
-        }
-        else
-        {
-            Debug.Log("Cat has " + currentPoints + " points");
+                if (!isShatting) // Check again to prevent multiple coroutine starts
+                {
+                    StartCoroutine(TimeToShat());
+                }
+            }
+            else
+            {
+                Debug.Log("Cat has " + currentPoints + " points");
+            }
         }
     }
 
     IEnumerator TimeToShat()
     {
+        isShatting = true; // Set the flag to true as shatting starts
+
         // Wait for 3 seconds
         yield return new WaitForSeconds(3);
 
         // Instantiate the poop object at the cat's current position
         if (poopPrefab != null)
         {
-            Instantiate(poopPrefab, poopSpawnPoint.transform.position, Quaternion.identity);
+            GameObject NewOBJ = Instantiate(poopPrefab, poopSpawnPoint.transform.position, Quaternion.identity);
+            BaseShit NewShit = NewOBJ.GetComponent<BaseShit>();
+            NewShit.TeamID = TeamID;
         }
         else
         {
@@ -146,8 +175,13 @@ public class Cat : MonoBehaviour
 
         // Reset points to 0
         currentPoints = 0;
+
+        isShatting = false; // Reset the flag as shatting ends
     }
 
-    public void IncreaseScore(int Scored) { }
+    public void IncreaseScore(int score)
+    {
+        CurrentScore += score;
+    }
 
 }
