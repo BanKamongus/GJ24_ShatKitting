@@ -51,9 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8922f1ae470a6a04e84b54dc6033b7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentScore: 0
   maxPoints: 100
+  actionKey: 97
+  CurrentScore: 0
   TXT_Score: {fileID: 674717898559996077}
+  moveKey: 113
+  moveSpeed: 5
+  moveDistance: 2
 --- !u!114 &4877387284883719757
 MonoBehaviour:
   m_ObjectHideFlags: 0

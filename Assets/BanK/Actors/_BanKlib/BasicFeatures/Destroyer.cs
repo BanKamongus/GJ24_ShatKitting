@@ -16,5 +16,14 @@ public class Destroyer : MonoBehaviour
             foreach (GameObject obj in SpawnOnDeath){
                 Instantiate(obj, transform.position, transform.rotation);
             }
+            Destroy(this);
+    }
+
+    void DestroyTarget( GameObject Target) {
+        foreach (GameObject obj in SpawnOnDeath)
+        {
+            Instantiate(obj, Target.transform.position, Target.transform.rotation);
+        }
+        Destroy(Target);
     }
 }

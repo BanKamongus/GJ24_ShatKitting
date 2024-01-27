@@ -1060,7 +1060,7 @@ PrefabInstance:
     - target: {fileID: 6160929907330380130, guid: 0659568c02f55fe498380b62a5c9bf8d,
         type: 3}
       propertyPath: moveKey
-      value: 33
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 6160929907330380130, guid: 0659568c02f55fe498380b62a5c9bf8d,
         type: 3}

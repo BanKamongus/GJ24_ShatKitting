@@ -11,8 +11,11 @@ public class Game : MonoBehaviour
     public Spawner[] Spawners;
     public float RowOffset = 0.4f, RowScale = 2.25f;
 
-    [Header("SpawnablePrefabs")]
+    [Header("Properties")]
     public GameObject[] SpawnOBJ;
+
+    [Header("Screens")]
+    public GameObject Screen_End;
 
     void Start(){
         Game_Init();
@@ -44,6 +47,15 @@ public class Game : MonoBehaviour
                             Vector3 newPosition = new Vector3(catRow.Cat.gameObject.transform.position.x, i * RowScale + RowOffset, 0); // Adjust the yOffset as needed
                             catRow.Cat.gameObject.transform.position = Vector3.Lerp(catRow.Cat.gameObject.transform.position, newPosition, 5 * Time.deltaTime); ;
                         }
+                    }
+
+
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Endhere GetEndhere = collision.gameObject.GetComponent<Endhere>();
+        if (GetEndhere != null) {
+            Screen_End.SetActive(true);
+        }
     }
-    
 }
