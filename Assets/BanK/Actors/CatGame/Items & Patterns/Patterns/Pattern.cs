@@ -13,6 +13,6 @@ public class Pattern : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(-0.03f, 0, 0);
+        transform.position += new Vector3(-3.0f * Time.deltaTime, 0, 0);
     }
 }

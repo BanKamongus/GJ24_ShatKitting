@@ -104,6 +104,18 @@ public class Cat : MonoBehaviour
             Debug.Log("Collision with item detected");
             canFeed = true;
             currentItem = item;
+            StartCoroutine(DelayedDestroy(item));
+        }
+    }
+
+    private IEnumerator DelayedDestroy(Item item)
+    {
+        yield return new WaitForSeconds(2);
+
+        // Check if the item hasn't been interacted with and destroy it
+        if (item != null && !item.HasBeenUsed)
+        {
+            item.DestroyItem();
         }
     }
 

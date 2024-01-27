@@ -27,7 +27,7 @@ public class Item : MonoBehaviour
     public FoodType foodType;
     public int foodPoints = 10; // Points this food provides, set this in Inspector
 
-    // Add any additional properties for different effects of food types
+    public bool HasBeenUsed { get; private set; } = false;
 
     void Update()
     {
@@ -36,6 +36,7 @@ public class Item : MonoBehaviour
 
     public void UseItem(Cat cat)
     {
+        HasBeenUsed = true;
         switch (itemType)
         {
             case ItemType.Food:
