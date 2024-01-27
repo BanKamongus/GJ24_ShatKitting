@@ -32,12 +32,11 @@ public class Game : MonoBehaviour
 
 
                     void Spawners_Init() {
-                        Spawners = FindObjectsOfType<Spawner>();                            
-                            foreach (Spawner EACH in Spawners)
-                            {
-                                EACH.Spawn(SpawnOBJ[0]);
-                            }
+                        for (int i = 0; i < CatRows.Length; i++){
+                            CatRows[i].Spawner.Spawn(SpawnOBJ[i]);
+                        }
                     }
+
                     //float SpawnTime = 0;   
                     void Spawners_Update() {
                         CatRows = CatRows.OrderBy(row => row.Cat.CurrentScore).ToArray();

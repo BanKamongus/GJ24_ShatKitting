@@ -35,13 +35,13 @@ public class Item : MonoBehaviour
 
 
 
-    float G = 0.05f;
-    float V = 0.016f;
+    float G = 0.4f;
+    float V = 0.16f;
     int Ylvl = 0;
 
     void Start()
     {
-        Ylvl = Random.Range(0, -3);
+        Ylvl = Random.Range(-1, -10);
     }
     void Update()
     {
