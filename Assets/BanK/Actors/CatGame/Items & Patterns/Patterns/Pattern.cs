@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pattern : MonoBehaviour
 {
 
-
+    public float speed = -5.0f;
     void Start()
     {
         
@@ -13,6 +13,6 @@ public class Pattern : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(-3.0f * Time.deltaTime, 0, 0);
+        transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
     }
 }
