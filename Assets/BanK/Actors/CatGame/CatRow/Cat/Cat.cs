@@ -19,7 +19,8 @@ public class Cat : MonoBehaviour
     [Header("Movement")]
     public KeyCode moveKey; // Key to move the cat
     public float moveSpeed = 5.0f; // Speed of movement
-    public float moveDistance = 2.0f; // Distance to move
+    public float SpeedMultiplier = 1f;
+    public float moveDistance = 3.0f; // Distance to move
 
     [Header("Poop Settings")]
     public GameObject poopPrefab; // Assign this in the Inspector
@@ -61,22 +62,29 @@ public class Cat : MonoBehaviour
     {
         if (Input.GetKey(moveKey))
         {
-            // Move to the right
-            isMoving = true;
-            MoveCat(targetPosition);
+            // Move to the right, but not beyond x = 10
+            if (transform.position.x < originalPosition.x + 10)
+            {
+                MoveCat(new Vector3(moveSpeed* SpeedMultiplier * Time.deltaTime, 0, 0));
+            }
         }
-        else if (isMoving)
+        else
         {
             // Move back to the original position
-            MoveCat(originalPosition);
-            isMoving = false;
+            MoveCat(new Vector3(-moveSpeed * SpeedMultiplier * Time.deltaTime, 0, 0));
         }
     }
 
-    private void MoveCat(Vector3 targetPos)
+    private void MoveCat(Vector3 movement)
     {
-        // Move towards the target position
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+        // Move towards the target direction
+        transform.position += movement;
+
+        // Ensure the cat doesn't move past its original position when moving back
+        if (transform.position.x < originalPosition.x)
+        {
+            transform.position = new Vector3(originalPosition.x, transform.position.y, transform.position.z);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -104,7 +112,7 @@ public class Cat : MonoBehaviour
         return Input.GetKeyDown(actionKey);
     }
 
-    void Feed(int points)
+    public void Feed(int points)
     {
         currentPoints += points;
         if (currentPoints >= maxPoints)
@@ -129,7 +137,7 @@ public class Cat : MonoBehaviour
         // Instantiate the poop object at the cat's current position
         if (poopPrefab != null)
         {
-            Instantiate(poopPrefab, transform.position, Quaternion.identity);
+            Instantiate(poopPrefab, poopSpawnPoint.transform.position, Quaternion.identity);
         }
         else
         {
@@ -139,5 +147,7 @@ public class Cat : MonoBehaviour
         // Reset points to 0
         currentPoints = 0;
     }
+
+    public void IncreaseScore(int Scored) { }
 
 }
