@@ -144,9 +144,13 @@ MonoBehaviour:
   moveSpeed: 5
   SpeedMultiplier: 1
   moveDistance: 13
-  poopPrefab: {fileID: 8957473494243288996, guid: 846a62210c65ae648ac3dd4a9c283367,
-    type: 3}
   poopSpawnPoint: {fileID: 582083215177240572}
+  meatPoopPrefab: {fileID: 8957473494243288996, guid: 739a67d57a156e8478c01644ac31be7e,
+    type: 3}
+  veggiePoopPrefab: {fileID: 8957473494243288996, guid: 846a62210c65ae648ac3dd4a9c283367,
+    type: 3}
+  royalPoopPrefab: {fileID: 8957473494243288996, guid: a74d5818a98df4b4aa1702b0ff7d6449,
+    type: 3}
 --- !u!114 &4877387284883719757
 MonoBehaviour:
   m_ObjectHideFlags: 0
