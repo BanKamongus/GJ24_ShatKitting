@@ -259,6 +259,7 @@ MonoBehaviour:
   animator: {fileID: 7641629131430857998}
   animationSpeed: 1
   runningAnimationSpeed: 4
+  scoreAnimator: {fileID: 6917051074593692162}
 --- !u!50 &6253190860242817982
 Rigidbody2D:
   serializedVersion: 4
@@ -389,6 +390,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3975033626506358130, guid: 772b2f31842015747ba4c8b22e7155f3,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.29411766
+      objectReference: {fileID: 0}
+    - target: {fileID: 3975033626506358130, guid: 772b2f31842015747ba4c8b22e7155f3,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.29411766
+      objectReference: {fileID: 0}
+    - target: {fileID: 3975033626506358130, guid: 772b2f31842015747ba4c8b22e7155f3,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.9450981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3975033626506358130, guid: 772b2f31842015747ba4c8b22e7155f3,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4283124721
+      objectReference: {fileID: 0}
     - target: {fileID: 6894355936958225369, guid: 772b2f31842015747ba4c8b22e7155f3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -419,6 +440,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 772b2f31842015747ba4c8b22e7155f3, type: 3}
+--- !u!95 &6917051074593692162 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1133976920490933309, guid: 772b2f31842015747ba4c8b22e7155f3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5783465580547696191}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7233515662140869316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3756111382523669755, guid: 772b2f31842015747ba4c8b22e7155f3,

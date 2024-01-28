@@ -45,6 +45,9 @@ public class Cat : MonoBehaviour
     public float animationSpeed = 1.0f; // Default animation speed
     public float runningAnimationSpeed = 2.0f; // Speed when moving faster
 
+    [Header("Score Animation")]
+    public Animator scoreAnimator;
+
 
     private Item.FoodType lastFoodType;
 
@@ -238,6 +241,14 @@ public class Cat : MonoBehaviour
     public void IncreaseScore(int score)
     {
         CurrentScore += score;
+        TXT_Score.text = CurrentScore.ToString();
+
+        // Trigger the bounce animation
+        if (scoreAnimator != null)
+        {
+            scoreAnimator.SetTrigger("Bounce");
+        }
     }
+
 
 }
