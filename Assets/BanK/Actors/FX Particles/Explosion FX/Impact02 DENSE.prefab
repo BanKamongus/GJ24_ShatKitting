@@ -4874,7 +4874,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.3
+  m_MaxParticleSize: 0.4
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -4910,9 +4910,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bd55754a947090847918a4515b7cc48d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a01bc5d67de824a4ab5b8f2d81607582, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.385
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5040,7 +5040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cb53ebd315c5b4d9bc3478dc0ba9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: {fileID: 8300000, guid: a01bc5d67de824a4ab5b8f2d81607582, type: 3}
+  DefaultSound: {fileID: 0}
+  RandomSounds: []
   loop: 0
+  playRandomSound: 0
   Volume: 0.3
   OffsetStart: 2

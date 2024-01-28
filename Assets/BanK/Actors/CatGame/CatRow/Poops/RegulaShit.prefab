@@ -136,6 +136,7 @@ MonoBehaviour:
   ActiveEffect: {fileID: 8456482701297655069, guid: 7c1080ed972ed664e9e348036285fe04,
     type: 3}
   TeamID: 1
+  moveSpeed: 2
 --- !u!114 &5949527799111881172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +152,7 @@ MonoBehaviour:
   LifeTime: -1
   SpawnOnDeath:
   - {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
+  instantiateOnDeath: 1
 --- !u!58 &4864381281341112799
 CircleCollider2D:
   m_ObjectHideFlags: 0

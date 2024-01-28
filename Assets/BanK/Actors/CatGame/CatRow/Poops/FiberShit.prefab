@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 8957473494243288996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8740489056610446769}
@@ -136,6 +136,7 @@ MonoBehaviour:
   ActiveEffect: {fileID: 8456482701297655069, guid: f4a5be59521bed04394b007a8b5c058a,
     type: 3}
   TeamID: 1
+  moveSpeed: 2
 --- !u!114 &5949527799111881172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +152,7 @@ MonoBehaviour:
   LifeTime: -1
   SpawnOnDeath:
   - {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
+  instantiateOnDeath: 1
 --- !u!58 &4864381281341112799
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -183,9 +185,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.013514191}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.32838216
 --- !u!50 &5225661776431360436
 Rigidbody2D:
   serializedVersion: 4

@@ -153,3 +153,4 @@ MonoBehaviour:
   LifeTime: -1
   SpawnOnDeath:
   - {fileID: 2811071766864233464, guid: a496bf6537eb4af438d284f62c489b57, type: 3}
+  instantiateOnDeath: 1

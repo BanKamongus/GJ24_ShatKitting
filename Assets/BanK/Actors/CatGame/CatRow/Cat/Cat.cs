@@ -48,6 +48,17 @@ public class Cat : MonoBehaviour
     [Header("Score Animation")]
     public Animator scoreAnimator;
 
+    [Header("Attack Particle")]
+    public GameObject attackParticlePrefab;
+
+    [Header("Shat Sounds")]
+    private AudioSource audioSource; // AudioSource component
+    public AudioClip meatPoopSound; // Assign in Inspector
+    public AudioClip veggiePoopSound; // Assign in Inspector
+    public AudioClip royalPoopSound; // Assign in Inspector
+
+
+
 
     private Item.FoodType lastFoodType;
 
@@ -75,6 +86,13 @@ public class Cat : MonoBehaviour
         {
             Debug.LogError("SpriteRenderer not assigned!");
         }
+
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource)
+        {
+            // If no AudioSource component is found, add one
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
     void Update()
     {
@@ -84,11 +102,30 @@ public class Cat : MonoBehaviour
         // Handle movement input
         HandleMovement();
 
-        // Check for action key press and feed if possible
-        if (canFeed && Input.GetKeyDown(actionKey) && currentItem != null)
+        // Check for action key press and instantiate attack particle
+        if (Input.GetKeyDown(actionKey))
         {
-            HandleItemInteraction(currentItem);
-            canFeed = false; // Reset flag after interaction
+            Debug.Log("Action key pressed, instantiate attack particle");
+            InstantiateAttackParticle();
+
+            if (canFeed && currentItem != null)
+            {
+                HandleItemInteraction(currentItem);
+                canFeed = false; // Reset flag after interaction
+            }
+        }
+    }
+
+    private void InstantiateAttackParticle()
+    {
+        if (attackParticlePrefab != null)
+        {
+            // Instantiate the particle at the cat's position (or any other desired position)
+            Instantiate(attackParticlePrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogError("Attack particle prefab not assigned!");
         }
     }
 
@@ -111,7 +148,7 @@ public class Cat : MonoBehaviour
         }
         else
         {
-            Debug.Log("Move key not pressed");
+            //Debug.Log("Move key not pressed");
             // Move back to the original position
             MoveCat(new Vector3(-moveSpeed * SpeedMultiplier * Time.deltaTime, 0, 0));
 
@@ -140,12 +177,15 @@ public class Cat : MonoBehaviour
         Item item = other.gameObject.GetComponent<Item>();
         if (item != null)
         {
-            //Debug.Log("Collision with item detected");
+            Debug.Log("Collision with item detected");
             canFeed = true;
             currentItem = item;
-            //StartCoroutine(DelayedDestroy(item));
+
+            // Start the delayed destruction of the item
+            //item.InitiateSelfDestruction();
         }
     }
+
 
 
     void OnTriggerExit2D(Collider2D other)
@@ -191,11 +231,37 @@ public class Cat : MonoBehaviour
 
     IEnumerator TimeToShat()
     {
-        isShatting = true; // Set the flag to true as shatting starts
+        isShatting = true;
         ChangeSpriteColor(shattingColor);
 
+        if (animator != null)
+        {
+            animator.SetTrigger("Poop"); // Trigger the pooping animation
+        }
+
+        // Choose and play the shat sound based on the food type
+        AudioClip selectedSound = null;
+        switch (lastFoodType)
+        {
+            case Item.FoodType.Meat:
+                selectedSound = meatPoopSound;
+                break;
+            case Item.FoodType.Veggie:
+                selectedSound = veggiePoopSound;
+                break;
+            case Item.FoodType.Royal:
+                selectedSound = royalPoopSound;
+                break;
+        }
+
+        if (selectedSound != null)
+        {
+            audioSource.clip = selectedSound;
+            audioSource.Play();
+        }
+
         // Wait for 3 seconds
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         // Choose the correct poop prefab based on the last food type
         GameObject selectedPoopPrefab = null;

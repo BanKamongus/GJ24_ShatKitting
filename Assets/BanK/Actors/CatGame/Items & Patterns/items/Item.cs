@@ -75,6 +75,18 @@ public class Item : MonoBehaviour
         }
     }
 
+    // Call this method to initiate delayed self-destruction
+    public void InitiateSelfDestruction()
+    {
+        StartCoroutine(DelayedSelfDestruction());
+    }
+
+    private IEnumerator DelayedSelfDestruction()
+    {
+        yield return new WaitForSeconds(2); // Wait for 2 seconds
+        Destroy(gameObject); // Destroy the item
+    }
+
     public void DestroyItem()
     {
         Destroy(gameObject);

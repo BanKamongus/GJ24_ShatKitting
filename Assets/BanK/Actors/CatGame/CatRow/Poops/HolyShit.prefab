@@ -115,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 8957473494243288996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8740489056610446769}
@@ -137,6 +137,7 @@ MonoBehaviour:
   ActiveEffect: {fileID: 8456482701297655069, guid: 0da29361fbc27464ba5b01e1b07b3456,
     type: 3}
   TeamID: 5
+  moveSpeed: 2
 --- !u!114 &5949527799111881172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +153,7 @@ MonoBehaviour:
   LifeTime: -1
   SpawnOnDeath:
   - {fileID: 6192724089161036641, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
+  instantiateOnDeath: 1
 --- !u!58 &4864381281341112799
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -184,9 +186,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.014802496, y: 0.08696453}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.37397078
 --- !u!50 &5225661776431360436
 Rigidbody2D:
   serializedVersion: 4
@@ -222,7 +224,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8957473494243288996}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: bf17f44ab5a6c0d41aef4d3e32ec5948, type: 2}
   m_CullingMode: 0

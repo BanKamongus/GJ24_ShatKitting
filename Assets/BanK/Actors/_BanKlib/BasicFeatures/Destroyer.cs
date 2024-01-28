@@ -4,25 +4,38 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour
 {
-
     public float LifeTime = -1;
     public GameObject[] SpawnOnDeath;
+    public bool instantiateOnDeath = true; // Flag to control instantiation on death
 
-    void Start(){
-        if (LifeTime >= 0){    Destroy(gameObject, LifeTime);    }
+    void Start()
+    {
+        if (LifeTime >= 0)
+        {
+            Destroy(gameObject, LifeTime);
+        }
     }
 
-    void OnDestroy(){ 
-            foreach (GameObject obj in SpawnOnDeath){
+    void OnDestroy()
+    {
+        if (instantiateOnDeath)
+        {
+            foreach (GameObject obj in SpawnOnDeath)
+            {
                 Instantiate(obj, transform.position, transform.rotation);
             }
-            Destroy(this);
+        }
+        // No need to call Destroy(this) here, as the script will be destroyed along with the GameObject
     }
 
-    void DestroyTarget( GameObject Target) {
-        foreach (GameObject obj in SpawnOnDeath)
+    public void DestroyTarget(GameObject Target)
+    {
+        if (instantiateOnDeath)
         {
-            Instantiate(obj, Target.transform.position, Target.transform.rotation);
+            foreach (GameObject obj in SpawnOnDeath)
+            {
+                Instantiate(obj, Target.transform.position, Target.transform.rotation);
+            }
         }
         Destroy(Target);
     }
