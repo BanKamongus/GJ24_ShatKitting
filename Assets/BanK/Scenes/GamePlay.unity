@@ -909,19 +909,19 @@ PrefabInstance:
         type: 3}
       propertyPath: SpawnOBJ.Array.data[1]
       value: 
-      objectReference: {fileID: 4260157546202093726, guid: d5c5fd3d898a1d84abbc7b77ac896407,
+      objectReference: {fileID: 4260157546202093726, guid: 13767d67bec19654bb812fc05c907296,
         type: 3}
     - target: {fileID: 9186901403129775488, guid: 152d53f8a62ebfa40b698aa68a874e40,
         type: 3}
       propertyPath: SpawnOBJ.Array.data[2]
       value: 
-      objectReference: {fileID: 4260157546202093726, guid: 0b3b42dd11ea87546bba6f71c617352c,
+      objectReference: {fileID: 4260157546202093726, guid: 851f4cab52e6a7e4a83ca40a8b44b559,
         type: 3}
     - target: {fileID: 9186901403129775488, guid: 152d53f8a62ebfa40b698aa68a874e40,
         type: 3}
       propertyPath: SpawnOBJ.Array.data[3]
       value: 
-      objectReference: {fileID: 4260157546202093726, guid: 262f0f83810a2ba4295d86100a5dd93b,
+      objectReference: {fileID: 4260157546202093726, guid: 52e9bca31b7e3c14b83ef9f8f52576e3,
         type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
