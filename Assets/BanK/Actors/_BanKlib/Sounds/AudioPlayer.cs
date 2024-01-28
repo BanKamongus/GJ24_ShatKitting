@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    public AudioClip Sound;
+    public AudioClip DefaultSound;
+    public List<AudioClip> RandomSounds = new List<AudioClip>();
     private AudioSource audioSource;
 
     public bool loop = true;
+    public bool playRandomSound = false; // Toggle for playing random sound
     public float Volume = 1;
     public float OffsetStart = 0;
+
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = Volume;
-        audioSource.clip = Sound;
         audioSource.loop = loop;
         audioSource.time = OffsetStart;
-        audioSource.Play();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Choose which sound to play
+        if (playRandomSound && RandomSounds.Count > 0)
+        {
+            audioSource.clip = RandomSounds[Random.Range(0, RandomSounds.Count)];
+        }
+        else
+        {
+            audioSource.clip = DefaultSound;
+        }
+
+        audioSource.Play();
     }
 }

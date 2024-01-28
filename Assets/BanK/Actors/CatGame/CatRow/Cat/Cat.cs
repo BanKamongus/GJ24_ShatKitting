@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Cat : MonoBehaviour
@@ -18,7 +19,7 @@ public class Cat : MonoBehaviour
 
 
     [Header("UI")]
-    public TextMesh TXT_Score;
+    public TextMeshProUGUI TXT_Score;
 
     [Header("Movement")]
     public KeyCode moveKey; // Key to move the cat
@@ -38,6 +39,11 @@ public class Cat : MonoBehaviour
     public SpriteRenderer spriteRenderer; // Assign this in the Inspector
     public Color shattingColor = Color.green; // Color during shatting
     private Color originalColor; // To store the original color
+
+    [Header("Animation")]
+    public Animator animator; // Assign this in the Inspector
+    public float animationSpeed = 1.0f; // Default animation speed
+    public float runningAnimationSpeed = 2.0f; // Speed when moving faster
 
 
     private Item.FoodType lastFoodType;
@@ -90,13 +96,27 @@ public class Cat : MonoBehaviour
             // Move to the right, but not beyond x = 10s
             if (transform.position.x < originalPosition.x + 10)
             {
+                Debug.Log("Move key pressed");
                 MoveCat(new Vector3(moveSpeed * SpeedMultiplier * Time.deltaTime, 0, 0));
+                
+                // Speed up animation when moving
+                if (animator != null)
+                {
+                    animator.speed = runningAnimationSpeed;
+                }
             }
         }
         else
         {
+            Debug.Log("Move key not pressed");
             // Move back to the original position
             MoveCat(new Vector3(-moveSpeed * SpeedMultiplier * Time.deltaTime, 0, 0));
+
+            // Reset animation speed when not moving
+            if (animator != null)
+            {
+                animator.speed = animationSpeed;
+            }
         }
     }
 
@@ -117,7 +137,7 @@ public class Cat : MonoBehaviour
         Item item = other.gameObject.GetComponent<Item>();
         if (item != null)
         {
-            Debug.Log("Collision with item detected");
+            //Debug.Log("Collision with item detected");
             canFeed = true;
             currentItem = item;
             //StartCoroutine(DelayedDestroy(item));

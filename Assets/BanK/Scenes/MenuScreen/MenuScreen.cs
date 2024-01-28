@@ -5,8 +5,8 @@ using System.Collections;
 
 public class MenuScreen : MonoBehaviour
 {
-    public RectTransform MyRect;
     public Animator fadeblack;
+    public Animator swipeScreen;
     public float TransitionTime = 0.1f;
     public float SwipeSpeed = 10.0f;
     public float SwipeDistance = 10.0f;
@@ -30,9 +30,21 @@ public class MenuScreen : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+
+
+
+
+
         if (Screen == 0 && Input.GetKey(KeyCode.Space))
         {
-            StartCoroutine(SwipeText());
+            //StartCoroutine(SwipeText());
+
+            swipeScreen.SetTrigger("Swipe");
             Screen = 1;
         }
 
@@ -57,26 +69,17 @@ public class MenuScreen : MonoBehaviour
 
                 if (Time.time - holdStartTime >= holdDuration)
                 {
+
                     fadeblack.SetTrigger("Start");
-                    
-
-
-
                     //StopHold();
-
                     LoadNextScene();
                     
                 }
-
-                if(Bar.fillAmount == 1)
-                {
-                    fillAmount = 1;
-                }
             }
-
             else
             {
-                float newFillAmount = Mathf.MoveTowards(Bar.fillAmount, 0.0f, Time.deltaTime/ TransitionTime);
+                // If not holding, smoothly decrease the fill amount
+                float newFillAmount = Mathf.MoveTowards(Bar.fillAmount, 0.0f, Time.deltaTime / TransitionTime);
                 Bar.fillAmount = newFillAmount;
             }
 
@@ -98,20 +101,20 @@ public class MenuScreen : MonoBehaviour
     IEnumerator SwipeText()
     {
         Vector3 startPosition = Text.transform.position;
-        Vector3 targetPosition = new Vector3(830, Text.transform.position.y, Text.transform.position.z);
+        Vector3 targetPosition = new Vector3(900, Text.transform.position.y, Text.transform.position.z);
 
         float elapsedTime = 0f;
 
         while (elapsedTime < .5f)
         {
-            //float t = Mathf.Clamp01(elapsedTime / .5f);
-            //Text.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
-            MyRect.position = targetPosition;
-            //elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / .5f);
+            Text.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        MyRect.position = targetPosition;
+        Text.transform.position = targetPosition;
     }
 
     public void LoadNextScene()
@@ -123,9 +126,9 @@ public class MenuScreen : MonoBehaviour
 
     IEnumerator LoadScene(int levelIndex)
     {
-        //fadeblack.SetTrigger("Start");
+
         yield return new WaitForSeconds(TransitionTime);
-        //SceneManager.LoadScene(levelIndex);
-        Debug.Log("Change Scene");
+        SceneManager.LoadScene(levelIndex);
+
     }
 }

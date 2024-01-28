@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ef4c7e2f642f1d847ad02562d97cfc32
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - DSN RatBuRaNa
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d607709d527b7d046a6609849d3b20a4, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
