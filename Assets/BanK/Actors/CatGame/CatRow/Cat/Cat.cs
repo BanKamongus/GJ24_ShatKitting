@@ -94,7 +94,7 @@ public class Cat : MonoBehaviour
         if (Input.GetKey(moveKey))
         {
             // Move to the right, but not beyond x = 10s
-            if (transform.position.x < originalPosition.x + 10)
+            if (transform.position.x < originalPosition.x + moveDistance)
             {
                 Debug.Log("Move key pressed");
                 MoveCat(new Vector3(moveSpeed * SpeedMultiplier * Time.deltaTime, 0, 0));

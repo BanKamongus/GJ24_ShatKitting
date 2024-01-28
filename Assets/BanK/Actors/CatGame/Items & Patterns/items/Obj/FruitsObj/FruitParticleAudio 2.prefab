@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cb53ebd315c5b4d9bc3478dc0ba9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sound: {fileID: 8300000, guid: 9a09c7dc82d4dc44a872ccb441ee98b5, type: 3}
+  DefaultSound: {fileID: 8300000, guid: 9a09c7dc82d4dc44a872ccb441ee98b5, type: 3}
+  RandomSounds: []
   loop: 0
+  playRandomSound: 0
   Volume: 1
   OffsetStart: 0
 --- !u!114 &8867036568028698496
