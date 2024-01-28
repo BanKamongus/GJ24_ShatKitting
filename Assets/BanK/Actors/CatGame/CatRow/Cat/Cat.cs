@@ -34,6 +34,12 @@ public class Cat : MonoBehaviour
     public GameObject veggiePoopPrefab;
     public GameObject royalPoopPrefab;
 
+    [Header("Appearance")]
+    public SpriteRenderer spriteRenderer; // Assign this in the Inspector
+    public Color shattingColor = Color.green; // Color during shatting
+    private Color originalColor; // To store the original color
+
+
     private Item.FoodType lastFoodType;
 
     private Vector3 originalPosition; // Original position of the cat
@@ -50,6 +56,16 @@ public class Cat : MonoBehaviour
 
         originalPosition = transform.position;
         targetPosition = originalPosition + new Vector3(moveDistance, 0, 0);
+
+        // Store the original color of the sprite
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+        else
+        {
+            Debug.LogError("SpriteRenderer not assigned!");
+        }
     }
     void Update()
     {
@@ -108,16 +124,6 @@ public class Cat : MonoBehaviour
         }
     }
 
-    private IEnumerator DelayedDestroy(Item item)
-    {
-        yield return new WaitForSeconds(2);
-
-        // Check if the item hasn't been interacted with and destroy it
-        if (item != null && !item.HasBeenUsed)
-        {
-            item.DestroyItem();
-        }
-    }
 
     void OnTriggerExit2D(Collider2D other)
     {
@@ -163,6 +169,7 @@ public class Cat : MonoBehaviour
     IEnumerator TimeToShat()
     {
         isShatting = true; // Set the flag to true as shatting starts
+        ChangeSpriteColor(shattingColor);
 
         // Wait for 3 seconds
         yield return new WaitForSeconds(3);
@@ -195,9 +202,18 @@ public class Cat : MonoBehaviour
 
         // Reset points to 0
         currentPoints = 0;
-
+        ChangeSpriteColor(originalColor); // Revert color after shatting
         isShatting = false; // Reset the flag as shatting ends
     }
+
+    private void ChangeSpriteColor(Color color)
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = color;
+        }
+    }
+
 
     public void IncreaseScore(int score)
     {
